@@ -288,61 +288,61 @@ body {
         visibility: visible !important;
     }
 
-    /* Дата - слева вверху */
-    .date-block {
-        position: absolute !important;
-        top: 80px !important;
-        left: 5% !important;
-        opacity: 1 !important;
-        transform: none !important;
-        z-index: 10 !important;
-        display: block !important;
-    }
-
-    .date-main {
-        width: 180px !important;
-        height: 160px !important;
-        transform: none !important;
-    }
-
-    .digit {
-        font-size: 50px !important;
-    }
-
-    .digit-3 {
-        top: 0px !important;
-        left: 25px !important;
-    }
-
-    .digit-0-top {
-        top: 15px !important;
-        left: 65px !important;
-    }
-
-    .digit-0-bottom {
-        top: 65px !important;
-        left: 15px !important;
-    }
-
-    .digit-1 {
-        top: 85px !important;
-        left: 55px !important;
-    }
-
-    .date-line {
-        top: 95px !important;
-        left: 8px !important;
-        width: 110px !important;
-    }
-
-    .date-year {
-        position: absolute !important;
-        top: 85px !important;
-        left: 120px !important;
-        font-size: 18px !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
+                /* Дата - слева вверху, увеличенная */
+                .date-block {
+                    position: absolute !important;
+                    top: 80px !important;
+                    left: 5% !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                    z-index: 10 !important;
+                    display: block !important;
+                }
+        
+                .date-main {
+                    width: 220px !important;
+                    height: 195px !important;
+                    transform: none !important;
+                }
+        
+                .digit {
+                    font-size: 62px !important;
+                }
+        
+                .digit-3 {
+                    top: 0px !important;
+                    left: 30px !important;
+                }
+        
+                .digit-0-top {
+                    top: 20px !important;
+                    left: 80px !important;
+                }
+        
+                .digit-0-bottom {
+                    top: 80px !important;
+                    left: 20px !important;
+                }
+        
+                .digit-1 {
+                    top: 105px !important;
+                    left: 68px !important;
+                }
+        
+                .date-line {
+                    top: 95px !important;
+                    left: 10px !important;
+                    width: 135px !important;
+                }
+        
+                .date-year {
+                    position: absolute !important;
+                    top: 105px !important;
+                    left: 150px !important;
+                    font-size: 22px !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
 
     /* Локация - слева внизу */
     .location {
