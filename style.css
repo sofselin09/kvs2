@@ -1,0 +1,440 @@
+/* ===== Подключение шрифта Nuosu SIL ===== */
+@font-face {
+    font-family: 'Nuosu SIL';
+    src: url('fonts/NuosuSIL-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ===== Base ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    background-color: #001231;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #001231;
+    color: #ffffff;
+}
+
+/* ===== SPACER ===== */
+.scroll-spacer {
+    height: 400vh;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== ПЕРВЫЙ ЭКРАН ===== */
+.hero-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    background-color: #001231;
+    overflow: visible;
+    pointer-events: auto;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    will-change: transform, opacity;
+}
+
+.hero-number {
+    font-family: 'Nuosu SIL', 'Arial', sans-serif;
+    font-size: clamp(100px, 18vw, 240px);
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: -4px;
+    color: #ffffff;
+}
+
+.hero-divider {
+    width: 2px;
+    height: clamp(100px, 18vw, 240px);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    line-height: 1.1;
+    color: #ffffff;
+}
+
+/* ===== ВТОРОЙ ЭКРАН ===== */
+.content-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 80px 8%;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    /* Левая колонка фиксированная, правая — всё остальное */
+    gap: 80px;
+    align-items: center;
+    z-index: 50;
+    background-color: #001231;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* ===== ЛЕВАЯ КОЛОНКА ===== */
+.left-column {
+    position: relative;
+    /* Для абсолютного позиционирования дочерних элементов */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    min-height: 100vh;
+}
+
+/* ===== ДАТА (закреплена слева вверху) ===== */
+.date-block {
+    position: absolute;
+    top: -10px;
+    /* Отступ сверху */
+    left: 0;
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+/* ===== ДАТА — внутренние стили (без изменений) ===== */
+.date-main {
+    font-family: 'Nuosu SIL', 'Arial', sans-serif;
+    position: relative;
+    display: inline-block;
+    width: 260px;
+    height: 220px;
+    color: #ffffff;
+}
+
+.digit {
+    position: absolute;
+    font-family: 'Nuosu SIL', 'Arial', sans-serif;
+    font-size: clamp(60px, 10vw, 120px);
+    font-weight: normal;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.digit-3 {
+    top: -30px;
+    left: 40px;
+}
+
+.digit-0-top {
+    top: 5px;
+    left: 100px;
+}
+
+.digit-0-bottom {
+    top: 100px;
+    left: 30px;
+}
+
+.digit-1 {
+    top: 130px;
+    left: 90px;
+}
+
+.date-line {
+    position: absolute;
+    top: 75px;
+    left: 20px;
+    width: 170px;
+    height: 2px;
+    background: #ffffff;
+    transform: rotate(32deg);
+    transform-origin: left center;
+    z-index: 1;
+}
+
+.date-year {
+    font-family: 'Nuosu SIL', 'Arial', sans-serif;
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: normal;
+    position: absolute;
+    top: 145px;
+    left: 190px;
+    opacity: 0;
+    transform: translateX(-20px);
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+/* ===== ЛОКАЦИЯ (закреплена слева внизу) ===== */
+.location {
+    position: absolute;
+    bottom: 150px;
+    /* Такой же отступ как у даты сверху */
+    left: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Nuosu SIL', 'Arial', sans-serif;
+    font-size: clamp(14px, 1.8vw, 18px);
+    font-weight: normal;
+    letter-spacing: 3px;
+    color: #ffffff;
+}
+
+
+/* ===== ТЕКСТ ===== */
+.text-block {
+    opacity: 0;
+    transform: translateX(50px);
+    max-width: 900px;
+    /* Было ограничено шириной колонки, теперь шире */
+}
+
+.text-paragraph {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(15px, 1.6vw, 18px);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 35px;
+    opacity: 0;
+    transform: translateY(20px);
+    color: #ffffff;
+}
+
+.company-name {
+    margin-top: 50px;
+    font-size: clamp(14px, 1.5vw, 16px);
+    font-weight: 300;
+    opacity: 0;
+    transform: translateY(20px);
+    color: rgba(255, 255, 255, 0.6);
+    text-align: right;
+}
+
+/* ===== RESPONSIVE - Планшеты ===== */
+@media (max-width: 1024px) {
+    .content-fixed {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+        padding: 60px 5% !important;
+    }
+
+    .left-column {
+        align-items: flex-start !important;
+    }
+
+    .text-block {
+        max-width: 100% !important;
+    }
+}
+
+/* ===== RESPONSIVE - Мобильные ===== */
+@media (max-width: 768px) {
+    .content-fixed {
+        position: relative !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        display: block !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .left-column {
+        position: relative !important;
+        width: 100% !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        display: block !important;
+    }
+
+    /* ===== ДАТА — зафиксирована слева вверху ===== */
+    .date-block {
+        position: absolute !important;
+        top: 20px !important;
+        left: 5% !important;
+        opacity: 1 !important;
+        transform: none !important;
+        z-index: 10 !important;
+    }
+
+    .date-main {
+        width: 200px !important;
+        height: 180px !important;
+        transform: none !important;
+        transform-origin: top left !important;
+    }
+
+    .digit {
+        font-size: 55px !important;
+    }
+
+    .digit-3 {
+        top: -10px !important;
+        left: 30px !important;
+    }
+
+    .digit-0-top {
+        top: 20px !important;
+        left: 70px !important;
+    }
+
+    .digit-0-bottom {
+        top: 70px !important;
+        left: 20px !important;
+    }
+
+    .digit-1 {
+        top: 90px !important;
+        left: 60px !important;
+    }
+
+    .date-line {
+        top: 40px !important;
+        left: 10px !important;
+        width: 120px !important;
+    }
+
+    .date-year {
+        font-size: 20px !important;
+        top: 90px !important;
+        left: 130px !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* ===== ЛОКАЦИЯ — зафиксирована внизу слева ===== */
+    .location {
+        position: absolute !important;
+        bottom: 30px !important;
+        left: 5% !important;
+        opacity: 1 !important;
+        transform: none !important;
+        white-space: nowrap !important;
+        font-size: 13px !important;
+        letter-spacing: 2px !important;
+        color: #ffffff !important;
+        z-index: 10 !important;
+    }
+
+/* ===== ТЕКСТ — справа на экране, узкий ===== */
+.text-block {
+    position: absolute !important;
+    top: 60% !important;
+    right: 5% !important;
+    left: auto !important;
+    transform: translateY(-50%) !important;
+    opacity: 1 !important;
+    max-width: 55% !important;
+    width: 55% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 5 !important;
+}
+
+.text-paragraph {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 18px !important;
+    opacity: 1 !important;
+    transform: none !important;
+    color: #ffffff !important;
+    text-align: left !important;
+}
+
+.company-name {
+    text-align: right !important;
+    margin-top: 20px !important;
+    font-size: 13px !important;
+    opacity: 0.6 !important;
+    transform: none !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* ===== RESPONSIVE - Маленькие мобильные ===== */
+@media (max-width: 480px) {
+    .date-main {
+        width: 170px !important;
+        height: 150px !important;
+    }
+
+    .digit {
+        font-size: 48px !important;
+    }
+
+    .digit-3 {
+        top: 0px !important;
+        left: 25px !important;
+    }
+
+    .digit-0-top {
+        top: 15px !important;
+        left: 60px !important;
+    }
+
+    .digit-0-bottom {
+        top: 60px !important;
+        left: 15px !important;
+    }
+
+    .digit-1 {
+        top: 80px !important;
+        left: 50px !important;
+    }
+
+    .date-line {
+        top: 35px !important;
+        left: 8px !important;
+        width: 105px !important;
+    }
+
+    .date-year {
+        font-size: 18px !important;
+        top: 80px !important;
+        left: 115px !important;
+    }
+
+    .text-paragraph {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 15px !important;
+    }
+
+    .company-name {
+        font-size: 12px !important;
+    }
+
+    .location {
+        font-size: 12px !important;
+        letter-spacing: 1.5px !important;
+        bottom: 25px !important;
+    }

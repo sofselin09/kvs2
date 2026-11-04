@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 лет вместе — Кардан Вал Сервис</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Spacer для скролла -->
+    <div class="scroll-spacer" id="scrollSpacer"></div>
+
+    <!-- Первый экран (fixed) -->
+    <div class="hero-fixed" id="heroFixed">
+        <div class="hero-content" id="heroContent">
+            <div class="hero-number">20</div>
+            <div class="hero-divider"></div>
+            <div class="hero-text">
+                <span>ЛЕТ</span>
+                <span>ВМЕСТЕ</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Второй экран (fixed, скрыт через inline стили) -->
+    <div class="content-fixed" id="contentFixed" style="opacity: 0; visibility: hidden; pointer-events: none;">
+        <div class="left-column">
+            <div class="date-block" id="dateBlock">
+                <div class="date-main">
+                    <span class="digit digit-3">3</span>
+                    <span class="digit digit-0-top">0</span>
+                    <span class="digit digit-0-bottom">0</span>
+                    <span class="digit digit-1">1</span>
+                    <span class="date-line"></span>
+                    <span class="date-year" id="dateYear">2027</span>
+                </div>
+            </div>
+
+            <div class="location" id="location">
+                <div class="location-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                        <circle cx="12" cy="9" r="2.5" />
+                    </svg>
+                </div>
+                <span>ISTRA HOLIDAY</span>
+            </div>
+        </div>
+
+        <div class="text-block" id="textBlock">
+            <p class="text-paragraph">Приглашаем вас разделить с нами особенный момент — 20-летие нашей компании!</p>
+            <p class="text-paragraph">Два десятилетия роста, достижений, смелых решений и надёжного партнёрства. За эти
+                годы мы прошли большой путь, и каждый из вас стал частью нашей общей истории.</p>
+            <p class="text-paragraph">Будем рады отметить этот юбилей вместе с вами!</p>
+            <div class="company-name" id="companyName">Кардан Вал Сервис</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
