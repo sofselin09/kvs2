@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isMobile = window.innerWidth <= 768;
 
-    // ===== 1. Плавное появление Hero =====
+    // ===== Анимация первого экрана при загрузке =====
     gsap.fromTo('#heroContent',
         { opacity: 0.3, scale: 0.95 },
         {
@@ -34,89 +34,68 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (isMobile) {
-        // ===== МОБИЛЬНАЯ ВЕРСИЯ: простой скролл без ныряния =====
-        console.log('Mobile version: simple scroll');
+        // ===== МОБИЛЬНАЯ ВЕРСИЯ: snap scroll =====
+        console.log('Mobile version: snap scroll');
 
-        // Показываем второй экран сразу
+        let secondScreenShown = false;
+        let scrollTimeout;
+
+        // Показываем второй экран, но прозрачным
         gsap.set('#contentFixed', {
-            opacity: 1,
+            opacity: 0,
             visibility: 'visible',
             pointerEvents: 'auto'
         });
 
-        // Анимируем элементы второго экрана при появлении в viewport
-        gsap.to('#dateBlock', {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#contentFixed',
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            }
-        });
+        // Отслеживаем скролл
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
 
-        gsap.to('#dateYear', {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#contentFixed',
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            }
-        });
+            scrollTimeout = setTimeout(() => {
+                const currentScrollTop = window.scrollY;
+                const windowHeight = window.innerHeight;
 
-        gsap.to('#textBlock', {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#textBlock',
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            }
-        });
+                // Если проскроллили больше половины первого экрана
+                if (currentScrollTop > windowHeight * 0.5 && !secondScreenShown) {
+                    secondScreenShown = true;
 
-        gsap.to('.text-paragraph', {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#textBlock',
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            }
-        });
+                    // Мгновенно показываем второй экран
+                    gsap.to(window, {
+                        scrollTo: windowHeight,
+                        duration: 0.5,
+                        ease: 'power2.inOut'
+                    });
 
-        gsap.to('#companyName', {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#companyName',
-                start: 'top 90%',
-                toggleActions: 'play none none none'
-            }
-        });
+                    // Анимация появления элементов второго экрана
+                    gsap.to('#contentFixed', {
+                        opacity: 1,
+                        duration: 0.3
+                    });
 
-        gsap.to('#location', {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#location',
-                start: 'top 90%',
-                toggleActions: 'play none none none'
-            }
-        });
+                    gsap.from('#textBlock', {
+                        opacity: 0,
+                        y: 30,
+                        duration: 0.6,
+                        delay: 0.2
+                    });
+
+                } else if (currentScrollTop < windowHeight * 0.3 && secondScreenShown) {
+                    // Если вернулись назад
+                    secondScreenShown = false;
+
+                    gsap.to(window, {
+                        scrollTo: 0,
+                        duration: 0.5,
+                        ease: 'power2.inOut'
+                    });
+
+                    gsap.to('#contentFixed', {
+                        opacity: 0,
+                        duration: 0.3
+                    });
+                }
+            }, 100);
+        }, { passive: true });
 
     } else {
         // ===== ДЕСКТОПНАЯ ВЕРСИЯ: анимация с нырянием =====
