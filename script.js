@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Сброс позиции скролла при загрузке
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
     }
@@ -8,17 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo(0, 0);
     }, 50);
 
+    // Проверка загрузки GSAP
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
         console.error('GSAP не загружен!');
         return;
     }
 
     gsap.registerPlugin(ScrollTrigger);
-
     console.log('GSAP loaded, starting animations...');
 
     const isMobile = window.innerWidth <= 768;
 
+    // Анимация первого экрана при загрузке (работает везде)
     gsap.fromTo('#heroContent',
         { opacity: 0.3, scale: 0.95 },
         {
@@ -31,96 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (isMobile) {
-        console.log('Mobile version: sequential scroll animations');
+        console.log('Mobile version: CSS handles 100% visibility (GSAP disabled for debugging)');
 
-        // Принудительно показываем контейнер
-        const contentFixed = document.getElementById('contentFixed');
-        if (contentFixed) {
-            contentFixed.style.opacity = '1';
-            contentFixed.style.visibility = 'visible';
-            contentFixed.style.pointerEvents = 'auto';
-            contentFixed.style.display = 'block';
-            contentFixed.style.position = 'relative';
-        }
+        // На мобильном мы полностью полагаемся на CSS (opacity: 1 !important),
+        // чтобы гарантировать отображение второго экрана без конфликтов с JS.
+        // Как только это сработает, мы сможем аккуратно вернуть анимации.
 
         setTimeout(() => {
             ScrollTrigger.refresh();
-        }, 200);
-
-        gsap.from('#dateBlock', {
-            opacity: 0,
-            x: -30,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#dateBlock',
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            }
-        });
-
-        gsap.from('#dateYear', {
-            opacity: 0,
-            x: -20,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#dateYear',
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            }
-        });
-
-        gsap.from('#textBlock', {
-            opacity: 0,
-            x: 30,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#textBlock',
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-            }
-        });
-
-        gsap.from('.text-paragraph', {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            stagger: 0.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#textBlock',
-                start: 'top 75%',
-                toggleActions: 'play none none none'
-            }
-        });
-
-        gsap.from('#companyName', {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#companyName',
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            }
-        });
-
-        gsap.from('#location', {
-            opacity: 0,
-            y: 20,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '#location',
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            }
-        });
+        }, 300);
 
     } else {
+        // ===== ДЕСКТОПНАЯ ВЕРСИЯ: анимация с нырянием =====
         console.log('Desktop version: dive animation');
 
         let isReverseBlocked = false;
@@ -144,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Фаза 1: Ныряние первого экрана
         mainTl.to('#heroContent', {
             scale: 40,
             opacity: 0,
@@ -165,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.05
         });
 
+        // Фаза 2: Дата
         mainTl.to('#dateBlock', {
             opacity: 1,
             x: 0,
@@ -178,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: 'power3.out'
             }, '-=0.1');
 
+        // Фаза 3: Текст
         mainTl.to('#textBlock', {
             opacity: 1,
             x: 0,
@@ -198,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: 'power3.out'
             }, '-=0.1');
 
+        // Фаза 4: Локация
         mainTl.to('#location', {
             opacity: 1,
             y: 0,
@@ -205,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: 'power3.out'
         });
 
+        // Блокировка обратного скролла на десктопе
         window.addEventListener('wheel', (e) => {
             if (isReverseBlocked && e.deltaY < 0 && window.scrollY <= minScrollPosition + 50) {
                 e.preventDefault();
@@ -237,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Обновление ScrollTrigger при изменении размера окна
     window.addEventListener('resize', () => {
         ScrollTrigger.refresh();
     });
