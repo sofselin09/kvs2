@@ -249,20 +249,16 @@ body {
 
 /* ===== RESPONSIVE - Мобильные ===== */
 @media (max-width: 768px) {
-
-    /* Spacer убираем */
     .scroll-spacer {
         display: none !important;
     }
 
-    /* Первый экран — обычный блок */
     .hero-fixed {
         position: relative !important;
         height: 100vh !important;
         z-index: 1 !important;
     }
 
-    /* Второй экран — ВИДИМЫЙ сразу */
     .content-fixed {
         position: relative !important;
         height: auto !important;
@@ -275,7 +271,6 @@ body {
         display: block !important;
     }
 
-    /* Левая колонка — нормальный поток */
     .left-column {
         display: block !important;
         position: relative !important;
@@ -284,7 +279,6 @@ body {
         min-height: auto !important;
     }
 
-    /* Дата — относительное позиционирование */
     .date-block {
         position: relative !important;
         top: auto !important;
@@ -340,7 +334,6 @@ body {
         transform: translateX(-20px) !important;
     }
 
-    /* Текст — относительное позиционирование */
     .text-block {
         position: relative !important;
         top: auto !important;
@@ -374,7 +367,6 @@ body {
         color: rgba(255, 255, 255, 0.6) !important;
     }
 
-    /* Локация — относительное позиционирование */
     .location {
         position: relative !important;
         bottom: auto !important;
@@ -390,6 +382,7 @@ body {
         margin-bottom: 40px !important;
     }
 }
+
 /* ===== RESPONSIVE - Маленькие мобильные ===== */
 @media (max-width: 480px) {
     .text-paragraph {
