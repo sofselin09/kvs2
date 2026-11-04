@@ -291,7 +291,7 @@ body {
     /* Дата - слева вверху */
     .date-block {
         position: absolute !important;
-        top: 40px !important;
+        top: 60px !important;
         left: 5% !important;
         opacity: 1 !important;
         transform: none !important;
