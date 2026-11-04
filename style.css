@@ -247,6 +247,22 @@ body {
 
 /* ===== RESPONSIVE - Мобильные ===== */
 @media (max-width: 768px) {
+    .hero-fixed {
+            position: relative !important;
+            height: 100vh !important;
+        }
+    
+        .content-fixed {
+            position: relative !important;
+            height: auto !important;
+            min-height: 100vh !important;
+        }
+    
+        /* Уменьшаем spacer для мобильных */
+        .scroll-spacer {
+            height: 50vh !important;
+        }
+        
     .content-fixed {
         position: relative !important;
         height: 100vh !important;
