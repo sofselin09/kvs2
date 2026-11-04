@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ===== СБРОС ПОЗИЦИИ СКРОЛЛА ПРИ ЗАГРУЗКЕ =====
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
     }
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isMobile = window.innerWidth <= 768;
 
-    // ===== Анимация первого экрана при загрузке =====
     gsap.fromTo('#heroContent',
         { opacity: 0.3, scale: 0.95 },
         {
@@ -33,18 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (isMobile) {
-        // ===== МОБИЛЬНАЯ ВЕРСИЯ: последовательное появление при скролле =====
         console.log('Mobile version: sequential scroll animations');
 
-        // Обновляем ScrollTrigger после загрузки
+        // Принудительно показываем контейнер
+        const contentFixed = document.getElementById('contentFixed');
+        if (contentFixed) {
+            contentFixed.style.opacity = '1';
+            contentFixed.style.visibility = 'visible';
+            contentFixed.style.pointerEvents = 'auto';
+            contentFixed.style.display = 'block';
+            contentFixed.style.position = 'relative';
+        }
+
         setTimeout(() => {
             ScrollTrigger.refresh();
-        }, 100);
+        }, 200);
 
-        // 1. Дата появляется первой
-        gsap.to('#dateBlock', {
-            opacity: 1,
-            x: 0,
+        gsap.from('#dateBlock', {
+            opacity: 0,
+            x: -30,
             duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
@@ -54,10 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 2. Год появляется после даты
-        gsap.to('#dateYear', {
-            opacity: 1,
-            x: 0,
+        gsap.from('#dateYear', {
+            opacity: 0,
+            x: -20,
             duration: 0.6,
             ease: 'power3.out',
             scrollTrigger: {
@@ -67,10 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 3. Текст появляется
-        gsap.to('#textBlock', {
-            opacity: 1,
-            x: 0,
+        gsap.from('#textBlock', {
+            opacity: 0,
+            x: 30,
             duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
@@ -80,10 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 4. Параграфы появляются по очереди
-        gsap.to('.text-paragraph', {
-            opacity: 1,
-            y: 0,
+        gsap.from('.text-paragraph', {
+            opacity: 0,
+            y: 20,
             duration: 0.6,
             stagger: 0.2,
             ease: 'power3.out',
@@ -94,10 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 5. Название компании
-        gsap.to('#companyName', {
-            opacity: 1,
-            y: 0,
+        gsap.from('#companyName', {
+            opacity: 0,
+            y: 20,
             duration: 0.6,
             ease: 'power3.out',
             scrollTrigger: {
@@ -107,10 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 6. Локация появляется последней
-        gsap.to('#location', {
-            opacity: 1,
-            y: 0,
+        gsap.from('#location', {
+            opacity: 0,
+            y: 20,
             duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     } else {
-        // ===== ДЕСКТОПНАЯ ВЕРСИЯ: анимация с нырянием =====
         console.log('Desktop version: dive animation');
 
         let isReverseBlocked = false;
@@ -145,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Фаза 1 (0-30%): Ныряние первого экрана
         mainTl.to('#heroContent', {
             scale: 40,
             opacity: 0,
@@ -153,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: 'power2.inOut'
         });
 
-        // Скрываем первый экран
         mainTl.to('#heroFixed', {
             opacity: 0,
             visibility: 'hidden',
@@ -161,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.05
         });
 
-        // Показываем второй экран
         mainTl.to('#contentFixed', {
             opacity: 1,
             visibility: 'visible',
@@ -169,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.05
         });
 
-        // Фаза 2 (30-50%): Дата
         mainTl.to('#dateBlock', {
             opacity: 1,
             x: 0,
@@ -183,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: 'power3.out'
             }, '-=0.1');
 
-        // Фаза 3 (50-75%): Текст
         mainTl.to('#textBlock', {
             opacity: 1,
             x: 0,
@@ -204,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: 'power3.out'
             }, '-=0.1');
 
-        // Фаза 4 (75-100%): Локация
         mainTl.to('#location', {
             opacity: 1,
             y: 0,
@@ -212,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: 'power3.out'
         });
 
-        // ===== Блокировка обратного скролла =====
         window.addEventListener('wheel', (e) => {
             if (isReverseBlocked && e.deltaY < 0 && window.scrollY <= minScrollPosition + 50) {
                 e.preventDefault();
@@ -245,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ===== Обновление ScrollTrigger при ресайзе =====
     window.addEventListener('resize', () => {
         ScrollTrigger.refresh();
     });
