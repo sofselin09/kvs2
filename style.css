@@ -249,13 +249,10 @@ body {
 
 /* ===== RESPONSIVE - Мобильные ===== */
 @media (max-width: 768px) {
-
-    /* Убираем spacer */
     .scroll-spacer {
         display: none !important;
     }
 
-    /* Первый экран — обычный блок */
     .hero-fixed {
         position: relative !important;
         height: 100vh !important;
@@ -280,9 +277,15 @@ body {
         background-color: #001231 !important;
     }
 
-    /* Скрываем left-column */
+    /* ВАЖНО: left-column НЕ скрываем, делаем его контейнером для даты и локации */
     .left-column {
-        display: none !important;
+        display: block !important;
+        position: relative !important;
+        width: 100% !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
     /* Дата — слева вверху */
