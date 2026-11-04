@@ -259,7 +259,7 @@ body {
         z-index: 1 !important;
     }
 
-    /* КЛЮЧЕВОЕ: делаем контейнер полностью видимым */
+    /* Контейнер второго экрана ВИДИМ */
     #contentFixed,
     .content-fixed {
         position: relative !important;
@@ -285,12 +285,11 @@ body {
         min-height: auto !important;
     }
 
+    /* Убрали opacity: 0 !important, чтобы GSAP мог анимировать */
     .date-block {
         position: relative !important;
         top: auto !important;
         left: auto !important;
-        opacity: 0 !important;
-        transform: translateX(-30px) !important;
         z-index: 10 !important;
         margin-bottom: 40px !important;
         padding: 0 5% !important;
@@ -336,8 +335,6 @@ body {
         font-size: 20px !important;
         top: 90px !important;
         left: 130px !important;
-        opacity: 0 !important;
-        transform: translateX(-20px) !important;
     }
 
     .text-block {
@@ -345,8 +342,6 @@ body {
         top: auto !important;
         right: auto !important;
         left: auto !important;
-        transform: translateX(30px) !important;
-        opacity: 0 !important;
         max-width: 90% !important;
         width: 90% !important;
         padding: 0 5% !important;
@@ -358,8 +353,6 @@ body {
         font-size: 16px !important;
         line-height: 1.6 !important;
         margin-bottom: 20px !important;
-        opacity: 0 !important;
-        transform: translateY(20px) !important;
         color: #ffffff !important;
         text-align: left !important;
     }
@@ -368,8 +361,6 @@ body {
         text-align: right !important;
         margin-top: 30px !important;
         font-size: 14px !important;
-        opacity: 0 !important;
-        transform: translateY(20px) !important;
         color: rgba(255, 255, 255, 0.6) !important;
     }
 
@@ -377,8 +368,6 @@ body {
         position: relative !important;
         bottom: auto !important;
         left: auto !important;
-        opacity: 0 !important;
-        transform: translateY(20px) !important;
         white-space: nowrap !important;
         font-size: 13px !important;
         letter-spacing: 2px !important;
