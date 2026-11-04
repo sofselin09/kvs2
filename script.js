@@ -33,42 +33,87 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (isMobile) {
-        // ===== МОБИЛЬНАЯ ВЕРСИЯ: два экрана друг за другом =====
-        console.log('Mobile version: two screens in flow');
+        // ===== МОБИЛЬНАЯ ВЕРСИЯ: последовательное появление при скролле =====
+        console.log('Mobile version: sequential scroll animations');
 
-        // На мобильном второй экран уже виден (opacity: 1 в CSS)
-        // Просто анимируем появление текста при скролле
+        // 1. Дата появляется первой
+        gsap.to('#dateBlock', {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '#contentFixed',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            }
+        });
 
-        const textBlock = document.getElementById('textBlock');
-        const companyName = document.getElementById('companyName');
+        // 2. Год появляется после даты
+        gsap.to('#dateYear', {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '#contentFixed',
+                start: 'top 65%',
+                toggleActions: 'play none none none'
+            }
+        });
 
-        if (textBlock) {
-            gsap.from(textBlock, {
-                opacity: 0,
-                y: 40,
-                duration: 0.8,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: textBlock,
-                    start: 'top 85%',
-                    toggleActions: 'play none none none'
-                }
-            });
-        }
+        // 3. Текст появляется после даты
+        gsap.to('#textBlock', {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '#contentFixed',
+                start: 'top 60%',
+                toggleActions: 'play none none none'
+            }
+        });
 
-        if (companyName) {
-            gsap.from(companyName, {
-                opacity: 0,
-                y: 20,
-                duration: 0.6,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: companyName,
-                    start: 'top 90%',
-                    toggleActions: 'play none none none'
-                }
-            });
-        }
+        // 4. Параграфы появляются по очереди
+        gsap.to('.text-paragraph', {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '#textBlock',
+                start: 'top 55%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        // 5. Название компании
+        gsap.to('#companyName', {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '#companyName',
+                start: 'top 75%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+        // 6. Локация появляется последней
+        gsap.to('#location', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '#location',
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+            }
+        });
 
     } else {
         // ===== ДЕСКТОПНАЯ ВЕРСИЯ: анимация с нырянием =====
