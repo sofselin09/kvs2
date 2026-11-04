@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Сброс позиции скролла при загрузке
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
     }
@@ -9,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo(0, 0);
     }, 50);
 
-    // Проверка загрузки GSAP
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
         console.error('GSAP не загружен!');
         return;
@@ -20,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isMobile = window.innerWidth <= 768;
 
-    // Анимация первого экрана при загрузке (работает везде)
     gsap.fromTo('#heroContent',
         { opacity: 0.3, scale: 0.95 },
         {
@@ -33,120 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (isMobile) {
-        console.log('Mobile version: forcing visibility via JavaScript');
-
-        // Принудительно показываем ВСЕ элементы второго экрана
-        const elementsToShow = [
-            '#contentFixed',
-            '.left-column',
-            '#dateBlock',
-            '#dateYear',
-            '#textBlock',
-            '.text-paragraph',
-            '#companyName',
-            '#location'
-        ];
-
-        elementsToShow.forEach(selector => {
-            const elements = document.querySelectorAll(selector);
-            elements.forEach(el => {
-                el.style.opacity = '1';
-                el.style.visibility = 'visible';
-                el.style.display = 'block';
-                el.style.transform = 'none';
-                el.style.pointerEvents = 'auto';
-            });
-        });
-
-        // Специально для даты и локации — абсолютное позиционирование
-        const dateBlock = document.getElementById('dateBlock');
-        const location = document.getElementById('location');
-        const contentFixed = document.getElementById('contentFixed');
-        const leftColumn = document.querySelector('.left-column');
-
-        if (contentFixed) {
-            contentFixed.style.position = 'relative';
-            contentFixed.style.height = '100vh';
-            contentFixed.style.minHeight = '100vh';
-            contentFixed.style.opacity = '1';
-            contentFixed.style.visibility = 'visible';
-            contentFixed.style.pointerEvents = 'auto';
-        }
-
-        if (leftColumn) {
-            leftColumn.style.display = 'block';
-            leftColumn.style.position = 'relative';
-            leftColumn.style.width = '100%';
-            leftColumn.style.height = '100vh';
-            leftColumn.style.opacity = '1';
-            leftColumn.style.visibility = 'visible';
-        }
-
-        if (dateBlock) {
-            dateBlock.style.position = 'absolute';
-            dateBlock.style.top = '20px';
-            dateBlock.style.left = '5%';
-            dateBlock.style.opacity = '1';
-            dateBlock.style.visibility = 'visible';
-            dateBlock.style.display = 'block';
-            dateBlock.style.transform = 'none';
-            dateBlock.style.zIndex = '10';
-        }
-
-        if (location) {
-            location.style.position = 'absolute';
-            location.style.bottom = '30px';
-            location.style.left = '5%';
-            location.style.opacity = '1';
-            location.style.visibility = 'visible';
-            location.style.display = 'flex';
-            location.style.transform = 'none';
-            location.style.zIndex = '10';
-        }
-
-        const textBlock = document.getElementById('textBlock');
-        if (textBlock) {
-            textBlock.style.position = 'absolute';
-            textBlock.style.top = '50%';
-            textBlock.style.left = '50%';
-            textBlock.style.transform = 'translate(-50%, -50%)';
-            textBlock.style.opacity = '1';
-            textBlock.style.visibility = 'visible';
-            textBlock.style.maxWidth = '85%';
-            textBlock.style.width = '85%';
-            textBlock.style.margin = '0';
-            textBlock.style.padding = '0';
-        }
-
-        // Принудительно показываем все параграфы и название компании
-        document.querySelectorAll('.text-paragraph').forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-            el.style.visibility = 'visible';
-        });
-
-        const companyName = document.getElementById('companyName');
-        if (companyName) {
-            companyName.style.opacity = '0.7';
-            companyName.style.transform = 'none';
-            companyName.style.visibility = 'visible';
-        }
-
-        const dateYear = document.getElementById('dateYear');
-        if (dateYear) {
-            dateYear.style.opacity = '1';
-            dateYear.style.transform = 'none';
-            dateYear.style.visibility = 'visible';
-        }
-
-        console.log('All mobile elements forced visible');
-
-        setTimeout(() => {
-            ScrollTrigger.refresh();
-        }, 300);
-
+        console.log('Mobile version: CSS handles everything, no GSAP animations');
+        // На мобильном всё управляется через CSS
+        // Все элементы видны сразу благодаря opacity: 1 !important
     } else {
-        // ===== ДЕСКТОПНАЯ ВЕРСИЯ: анимация с нырянием =====
         console.log('Desktop version: dive animation');
 
         let isReverseBlocked = false;
@@ -170,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Фаза 1: Ныряние первого экрана
         mainTl.to('#heroContent', {
             scale: 40,
             opacity: 0,
@@ -192,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.05
         });
 
-        // Фаза 2: Дата
         mainTl.to('#dateBlock', {
             opacity: 1,
             x: 0,
@@ -206,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: 'power3.out'
             }, '-=0.1');
 
-        // Фаза 3: Текст
         mainTl.to('#textBlock', {
             opacity: 1,
             x: 0,
@@ -227,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: 'power3.out'
             }, '-=0.1');
 
-        // Фаза 4: Локация
         mainTl.to('#location', {
             opacity: 1,
             y: 0,
@@ -235,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: 'power3.out'
         });
 
-        // Блокировка обратного скролла на десктопе
         window.addEventListener('wheel', (e) => {
             if (isReverseBlocked && e.deltaY < 0 && window.scrollY <= minScrollPosition + 50) {
                 e.preventDefault();
@@ -268,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Обновление ScrollTrigger при изменении размера окна
     window.addEventListener('resize', () => {
         ScrollTrigger.refresh();
     });

@@ -259,7 +259,7 @@ body {
         z-index: 1 !important;
     }
 
-    /* Контейнер второго экрана — видимый */
+    /* Контейнер второго экрана */
     #contentFixed,
     .content-fixed {
         position: relative !important;
@@ -277,7 +277,7 @@ body {
         background-color: #001231 !important;
     }
 
-    /* ВАЖНО: left-column НЕ скрываем, делаем его контейнером для даты и локации */
+    /* Левая колонка - контейнер для даты и локации */
     .left-column {
         display: block !important;
         position: relative !important;
@@ -288,7 +288,7 @@ body {
         visibility: visible !important;
     }
 
-    /* Дата — слева вверху */
+    /* Дата - слева вверху */
     .date-block {
         position: absolute !important;
         top: 20px !important;
@@ -344,7 +344,7 @@ body {
         transform: none !important;
     }
 
-    /* Локация — слева внизу */
+    /* Локация - слева внизу */
     .location {
         position: absolute !important;
         bottom: 30px !important;
@@ -360,7 +360,7 @@ body {
         z-index: 10 !important;
     }
 
-    /* Текст — по центру экрана */
+    /* Текст - по центру экрана */
     .text-block {
         position: absolute !important;
         top: 50% !important;
