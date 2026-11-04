@@ -262,36 +262,38 @@ body {
         z-index: 1 !important;
     }
 
-    /* Второй экран — идёт сразу после первого */
+    /* Второй экран — ВИДИМЫЙ сразу */
     .content-fixed {
         position: relative !important;
         height: auto !important;
-        min-height: 100vh !important;
+        min-height: auto !important;
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto !important;
         z-index: 1 !important;
-        padding: 0 !important;
+        padding: 40px 0 !important;
         display: block !important;
     }
 
-    /* Левая колонка — видна */
+    /* Левая колонка — нормальный поток */
     .left-column {
-        display: flex !important;
-        flex-direction: column !important;
+        display: block !important;
         position: relative !important;
         width: 100% !important;
-        min-height: 100vh !important;
+        height: auto !important;
+        min-height: auto !important;
     }
 
-    /* Дата — слева вверху, скрыта изначально */
+    /* Дата — относительное позиционирование */
     .date-block {
-        position: absolute !important;
-        top: 20px !important;
-        left: 5% !important;
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
         opacity: 0 !important;
         transform: translateX(-30px) !important;
         z-index: 10 !important;
+        margin-bottom: 40px !important;
+        padding: 0 5% !important;
     }
 
     .date-main {
@@ -338,39 +340,25 @@ body {
         transform: translateX(-20px) !important;
     }
 
-    /* Локация — слева внизу, скрыта изначально */
-    .location {
-        position: absolute !important;
-        bottom: 30px !important;
-        left: 5% !important;
-        opacity: 0 !important;
-        transform: translateY(20px) !important;
-        white-space: nowrap !important;
-        font-size: 13px !important;
-        letter-spacing: 2px !important;
-        color: #ffffff !important;
-        z-index: 10 !important;
-    }
-
-    /* Текст — справа по центру, скрыт изначально */
+    /* Текст — относительное позиционирование */
     .text-block {
-        position: absolute !important;
-        top: 50% !important;
-        right: 5% !important;
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
         left: auto !important;
-        transform: translateY(-50%) translateX(30px) !important;
+        transform: translateX(30px) !important;
         opacity: 0 !important;
-        max-width: 55% !important;
-        width: 55% !important;
-        padding: 0 !important;
-        margin: 0 !important;
+        max-width: 90% !important;
+        width: 90% !important;
+        padding: 0 5% !important;
+        margin: 0 auto 40px !important;
         z-index: 5 !important;
     }
 
     .text-paragraph {
-        font-size: 14px !important;
-        line-height: 1.5 !important;
-        margin-bottom: 18px !important;
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 20px !important;
         opacity: 0 !important;
         transform: translateY(20px) !important;
         color: #ffffff !important;
@@ -379,11 +367,27 @@ body {
 
     .company-name {
         text-align: right !important;
-        margin-top: 20px !important;
-        font-size: 13px !important;
+        margin-top: 30px !important;
+        font-size: 14px !important;
         opacity: 0 !important;
         transform: translateY(20px) !important;
         color: rgba(255, 255, 255, 0.6) !important;
+    }
+
+    /* Локация — относительное позиционирование */
+    .location {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        opacity: 0 !important;
+        transform: translateY(20px) !important;
+        white-space: nowrap !important;
+        font-size: 13px !important;
+        letter-spacing: 2px !important;
+        color: #ffffff !important;
+        z-index: 10 !important;
+        padding: 0 5% !important;
+        margin-bottom: 40px !important;
     }
 }
 /* ===== RESPONSIVE - Маленькие мобильные ===== */

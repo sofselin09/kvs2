@@ -36,6 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // ===== МОБИЛЬНАЯ ВЕРСИЯ: последовательное появление при скролле =====
         console.log('Mobile version: sequential scroll animations');
 
+        // Обновляем ScrollTrigger после загрузки
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 100);
+
         // 1. Дата появляется первой
         gsap.to('#dateBlock', {
             opacity: 1,
@@ -43,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
-                trigger: '#contentFixed',
-                start: 'top 70%',
+                trigger: '#dateBlock',
+                start: 'top 80%',
                 toggleActions: 'play none none none'
             }
         });
@@ -56,21 +61,21 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.6,
             ease: 'power3.out',
             scrollTrigger: {
-                trigger: '#contentFixed',
-                start: 'top 65%',
+                trigger: '#dateYear',
+                start: 'top 85%',
                 toggleActions: 'play none none none'
             }
         });
 
-        // 3. Текст появляется после даты
+        // 3. Текст появляется
         gsap.to('#textBlock', {
             opacity: 1,
             x: 0,
             duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
-                trigger: '#contentFixed',
-                start: 'top 60%',
+                trigger: '#textBlock',
+                start: 'top 80%',
                 toggleActions: 'play none none none'
             }
         });
@@ -80,11 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
             opacity: 1,
             y: 0,
             duration: 0.6,
-            stagger: 0.15,
+            stagger: 0.2,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '#textBlock',
-                start: 'top 55%',
+                start: 'top 75%',
                 toggleActions: 'play none none none'
             }
         });
@@ -97,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '#companyName',
-                start: 'top 75%',
+                start: 'top 85%',
                 toggleActions: 'play none none none'
             }
         });
