@@ -33,11 +33,113 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (isMobile) {
-        console.log('Mobile version: CSS handles 100% visibility (GSAP disabled for debugging)');
+        console.log('Mobile version: forcing visibility via JavaScript');
 
-        // На мобильном мы полностью полагаемся на CSS (opacity: 1 !important),
-        // чтобы гарантировать отображение второго экрана без конфликтов с JS.
-        // Как только это сработает, мы сможем аккуратно вернуть анимации.
+        // Принудительно показываем ВСЕ элементы второго экрана
+        const elementsToShow = [
+            '#contentFixed',
+            '.left-column',
+            '#dateBlock',
+            '#dateYear',
+            '#textBlock',
+            '.text-paragraph',
+            '#companyName',
+            '#location'
+        ];
+
+        elementsToShow.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+                el.style.opacity = '1';
+                el.style.visibility = 'visible';
+                el.style.display = 'block';
+                el.style.transform = 'none';
+                el.style.pointerEvents = 'auto';
+            });
+        });
+
+        // Специально для даты и локации — абсолютное позиционирование
+        const dateBlock = document.getElementById('dateBlock');
+        const location = document.getElementById('location');
+        const contentFixed = document.getElementById('contentFixed');
+        const leftColumn = document.querySelector('.left-column');
+
+        if (contentFixed) {
+            contentFixed.style.position = 'relative';
+            contentFixed.style.height = '100vh';
+            contentFixed.style.minHeight = '100vh';
+            contentFixed.style.opacity = '1';
+            contentFixed.style.visibility = 'visible';
+            contentFixed.style.pointerEvents = 'auto';
+        }
+
+        if (leftColumn) {
+            leftColumn.style.display = 'block';
+            leftColumn.style.position = 'relative';
+            leftColumn.style.width = '100%';
+            leftColumn.style.height = '100vh';
+            leftColumn.style.opacity = '1';
+            leftColumn.style.visibility = 'visible';
+        }
+
+        if (dateBlock) {
+            dateBlock.style.position = 'absolute';
+            dateBlock.style.top = '20px';
+            dateBlock.style.left = '5%';
+            dateBlock.style.opacity = '1';
+            dateBlock.style.visibility = 'visible';
+            dateBlock.style.display = 'block';
+            dateBlock.style.transform = 'none';
+            dateBlock.style.zIndex = '10';
+        }
+
+        if (location) {
+            location.style.position = 'absolute';
+            location.style.bottom = '30px';
+            location.style.left = '5%';
+            location.style.opacity = '1';
+            location.style.visibility = 'visible';
+            location.style.display = 'flex';
+            location.style.transform = 'none';
+            location.style.zIndex = '10';
+        }
+
+        const textBlock = document.getElementById('textBlock');
+        if (textBlock) {
+            textBlock.style.position = 'absolute';
+            textBlock.style.top = '50%';
+            textBlock.style.left = '50%';
+            textBlock.style.transform = 'translate(-50%, -50%)';
+            textBlock.style.opacity = '1';
+            textBlock.style.visibility = 'visible';
+            textBlock.style.maxWidth = '85%';
+            textBlock.style.width = '85%';
+            textBlock.style.margin = '0';
+            textBlock.style.padding = '0';
+        }
+
+        // Принудительно показываем все параграфы и название компании
+        document.querySelectorAll('.text-paragraph').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            el.style.visibility = 'visible';
+        });
+
+        const companyName = document.getElementById('companyName');
+        if (companyName) {
+            companyName.style.opacity = '0.7';
+            companyName.style.transform = 'none';
+            companyName.style.visibility = 'visible';
+        }
+
+        const dateYear = document.getElementById('dateYear');
+        if (dateYear) {
+            dateYear.style.opacity = '1';
+            dateYear.style.transform = 'none';
+            dateYear.style.visibility = 'visible';
+        }
+
+        console.log('All mobile elements forced visible');
 
         setTimeout(() => {
             ScrollTrigger.refresh();
