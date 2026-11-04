@@ -96,7 +96,6 @@ body {
     padding: 80px 8%;
     display: grid;
     grid-template-columns: 300px 1fr;
-    /* Левая колонка фиксированная, правая — всё остальное */
     gap: 80px;
     align-items: center;
     z-index: 50;
@@ -104,15 +103,7 @@ body {
 }
 
 .left-column {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-/* ===== ЛЕВАЯ КОЛОНКА ===== */
-.left-column {
     position: relative;
-    /* Для абсолютного позиционирования дочерних элементов */
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -123,13 +114,12 @@ body {
 .date-block {
     position: absolute;
     top: -10px;
-    /* Отступ сверху */
     left: 0;
     opacity: 0;
     transform: translateX(-50px);
 }
 
-/* ===== ДАТА — внутренние стили (без изменений) ===== */
+/* ===== ДАТА — внутренние стили ===== */
 .date-main {
     font-family: 'Nuosu SIL', 'Arial', sans-serif;
     position: relative;
@@ -193,11 +183,10 @@ body {
     white-space: nowrap;
 }
 
-/* ===== ЛОКАЦИЯ (закреплена слева внизу) ===== */
+/* ===== ЛОКАЦИЯ ===== */
 .location {
     position: absolute;
     bottom: 150px;
-    /* Такой же отступ как у даты сверху */
     left: 0;
     opacity: 0;
     transform: translateY(20px);
@@ -211,13 +200,11 @@ body {
     color: #ffffff;
 }
 
-
 /* ===== ТЕКСТ ===== */
 .text-block {
     opacity: 0;
     transform: translateX(50px);
     max-width: 900px;
-    /* Было ограничено шириной колонки, теперь шире */
 }
 
 .text-paragraph {
@@ -277,7 +264,6 @@ body {
         display: block !important;
     }
 
-    /* ===== ДАТА — зафиксирована слева вверху ===== */
     .date-block {
         position: absolute !important;
         top: 20px !important;
@@ -332,7 +318,6 @@ body {
         transform: none !important;
     }
 
-    /* ===== ЛОКАЦИЯ — зафиксирована внизу слева ===== */
     .location {
         position: absolute !important;
         bottom: 30px !important;
@@ -346,39 +331,41 @@ body {
         z-index: 10 !important;
     }
 
-/* ===== ТЕКСТ — справа на экране, узкий ===== */
-.text-block {
-    position: absolute !important;
-    top: 60% !important;
-    right: 5% !important;
-    left: auto !important;
-    transform: translateY(-50%) !important;
-    opacity: 1 !important;
-    max-width: 55% !important;
-    width: 55% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    z-index: 5 !important;
+    .text-block {
+        position: absolute !important;
+        top: 60% !important;
+        right: 5% !important;
+        left: auto !important;
+        transform: translateY(-50%) !important;
+        opacity: 1 !important;
+        max-width: 55% !important;
+        width: 55% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        z-index: 5 !important;
+    }
+
+    .text-paragraph {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 18px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        color: #ffffff !important;
+        text-align: left !important;
+    }
+
+    .company-name {
+        text-align: right !important;
+        margin-top: 20px !important;
+        font-size: 13px !important;
+        opacity: 0.6 !important;
+        transform: none !important;
+        color: rgba(255, 255, 255, 0.6) !important;
+    }
 }
 
-.text-paragraph {
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    margin-bottom: 18px !important;
-    opacity: 1 !important;
-    transform: none !important;
-    color: #ffffff !important;
-    text-align: left !important;
-}
-
-.company-name {
-    text-align: right !important;
-    margin-top: 20px !important;
-    font-size: 13px !important;
-    opacity: 0.6 !important;
-    transform: none !important;
-    color: rgba(255, 255, 255, 0.6) !important;
-}
+/* ← ЭТА СКОБКА БЫЛА ПРОПУЩЕНА */
 
 /* ===== RESPONSIVE - Маленькие мобильные ===== */
 @media (max-width: 480px) {
