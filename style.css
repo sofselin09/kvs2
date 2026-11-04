@@ -249,33 +249,43 @@ body {
 
 /* ===== RESPONSIVE - Мобильные ===== */
 @media (max-width: 768px) {
+
+    /* Убираем spacer */
     .scroll-spacer {
         display: none !important;
     }
 
+    /* Первый экран — обычный блок */
     .hero-fixed {
         position: relative !important;
         height: 100vh !important;
+        z-index: 1 !important;
     }
 
-    /* Контейнер второго экрана */
+    /* Контейнер второго экрана — видимый */
     #contentFixed,
     .content-fixed {
         position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100vh !important;
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto !important;
-        display: block !important;
+        z-index: 1 !important;
         padding: 0 !important;
-        min-height: 100vh !important;
+        display: block !important;
+        background-color: #001231 !important;
     }
 
-    /* Скрываем left-column, так как позиционируем элементы отдельно */
+    /* Скрываем left-column */
     .left-column {
         display: none !important;
     }
 
-    /* Дата — абсолютно слева вверху */
+    /* Дата — слева вверху */
     .date-block {
         position: absolute !important;
         top: 20px !important;
@@ -289,6 +299,7 @@ body {
     .date-main {
         width: 180px !important;
         height: 160px !important;
+        transform: none !important;
     }
 
     .digit {
@@ -296,7 +307,7 @@ body {
     }
 
     .digit-3 {
-        top: 0 !important;
+        top: 0px !important;
         left: 25px !important;
     }
 
@@ -327,9 +338,10 @@ body {
         left: 120px !important;
         font-size: 18px !important;
         opacity: 1 !important;
+        transform: none !important;
     }
 
-    /* Локация — абсолютно слева внизу */
+    /* Локация — слева внизу */
     .location {
         position: absolute !important;
         bottom: 30px !important;
@@ -341,10 +353,11 @@ body {
         gap: 8px !important;
         font-size: 13px !important;
         letter-spacing: 2px !important;
+        color: #ffffff !important;
         z-index: 10 !important;
     }
 
-    /* Текст — по центру экрана, без пропусков */
+    /* Текст — по центру экрана */
     .text-block {
         position: absolute !important;
         top: 50% !important;
@@ -364,6 +377,7 @@ body {
         margin-bottom: 15px !important;
         opacity: 1 !important;
         transform: none !important;
+        color: #ffffff !important;
         text-align: left !important;
     }
 
@@ -372,61 +386,61 @@ body {
         margin-top: 20px !important;
         font-size: 13px !important;
         opacity: 0.7 !important;
+        transform: none !important;
+        color: rgba(255, 255, 255, 0.6) !important;
     }
 }
 
-/* ===== Маленькие мобильные (iPhone SE и т.д.) ===== */
+/* ===== RESPONSIVE - Маленькие мобильные ===== */
 @media (max-width: 480px) {
-    .text-block {
-        max-width: 55% !important;
-        width: 55% !important;
-        right: 3% !important;
-    }
-
     .text-paragraph {
-        font-size: 13px !important;
+        font-size: 14px !important;
         line-height: 1.4 !important;
     }
 
+    .company-name {
+        font-size: 12px !important;
+    }
+
     .date-main {
-        width: 170px !important;
-        height: 150px !important;
+        width: 160px !important;
+        height: 140px !important;
     }
 
     .digit {
-        font-size: 48px !important;
+        font-size: 45px !important;
     }
 
     .digit-3 {
         top: 0px !important;
-        left: 25px !important;
+        left: 20px !important;
     }
 
     .digit-0-top {
-        top: 15px !important;
-        left: 60px !important;
+        top: 10px !important;
+        left: 55px !important;
     }
 
     .digit-0-bottom {
-        top: 60px !important;
-        left: 15px !important;
+        top: 55px !important;
+        left: 10px !important;
     }
 
     .digit-1 {
-        top: 80px !important;
-        left: 50px !important;
+        top: 75px !important;
+        left: 45px !important;
     }
 
     .date-line {
-        top: 35px !important;
-        left: 8px !important;
-        width: 105px !important;
+        top: 30px !important;
+        left: 5px !important;
+        width: 100px !important;
     }
 
     .date-year {
-        top: 80px !important;
-        left: 115px !important;
-        font-size: 18px !important;
+        top: 75px !important;
+        left: 105px !important;
+        font-size: 16px !important;
     }
 
     .location {
