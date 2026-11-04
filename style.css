@@ -265,25 +265,25 @@ body {
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        padding: 20px 5% !important;
+        display: block !important;
+        padding: 0 !important;
         min-height: 100vh !important;
     }
 
-    /* Левая колонка */
+    /* Скрываем left-column, так как позиционируем элементы отдельно */
     .left-column {
-        display: contents !important;
-        /* Позволяет дочерним элементам участвовать в общем потоке */
+        display: none !important;
     }
 
-    /* Дата — первая */
+    /* Дата — абсолютно слева вверху */
     .date-block {
-        position: relative !important;
+        position: absolute !important;
+        top: 20px !important;
+        left: 5% !important;
         opacity: 1 !important;
         transform: none !important;
-        margin-bottom: 30px !important;
-        order: 1 !important;
+        z-index: 10 !important;
+        display: block !important;
     }
 
     .date-main {
@@ -329,24 +329,42 @@ body {
         opacity: 1 !important;
     }
 
-    /* Текст — второй (между датой и локацией) */
-    .text-block {
-        position: relative !important;
+    /* Локация — абсолютно слева внизу */
+    .location {
+        position: absolute !important;
+        bottom: 30px !important;
+        left: 5% !important;
         opacity: 1 !important;
         transform: none !important;
-        max-width: 100% !important;
-        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        font-size: 13px !important;
+        letter-spacing: 2px !important;
+        z-index: 10 !important;
+    }
+
+    /* Текст — по центру экрана, без пропусков */
+    .text-block {
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        opacity: 1 !important;
+        max-width: 85% !important;
+        width: 85% !important;
         margin: 0 !important;
         padding: 0 !important;
-        order: 2 !important;
+        z-index: 5 !important;
     }
 
     .text-paragraph {
-        font-size: 15px !important;
+        font-size: 16px !important;
         line-height: 1.5 !important;
         margin-bottom: 15px !important;
         opacity: 1 !important;
         transform: none !important;
+        text-align: left !important;
     }
 
     .company-name {
@@ -354,20 +372,6 @@ body {
         margin-top: 20px !important;
         font-size: 13px !important;
         opacity: 0.7 !important;
-    }
-
-    /* Локация — третья (внизу) */
-    .location {
-        position: relative !important;
-        opacity: 1 !important;
-        transform: none !important;
-        margin-top: 30px !important;
-        order: 3 !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 8px !important;
-        font-size: 13px !important;
-        letter-spacing: 2px !important;
     }
 }
 
