@@ -330,7 +330,7 @@ body {
     }
 
     .date-line {
-        top: 35px !important;
+        top: 45px !important;
         left: 8px !important;
         width: 110px !important;
     }
@@ -347,7 +347,7 @@ body {
     /* Локация - слева внизу */
     .location {
         position: absolute !important;
-        bottom: 30px !important;
+        bottom: 60px !important;
         left: 5% !important;
         opacity: 1 !important;
         transform: none !important;
@@ -363,7 +363,7 @@ body {
     /* Текст - по центру экрана */
     .text-block {
         position: absolute !important;
-        top: 50% !important;
+        top: 60% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
         opacity: 1 !important;
