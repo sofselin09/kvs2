@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
         history.scrollRestoration = 'manual';
     }
 
-    // Принудительная прокрутка в начало с небольшой задержкой
     setTimeout(() => {
         window.scrollTo(0, 0);
     }, 50);
@@ -34,68 +33,42 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (isMobile) {
-        // ===== МОБИЛЬНАЯ ВЕРСИЯ: snap scroll =====
-        console.log('Mobile version: snap scroll');
+        // ===== МОБИЛЬНАЯ ВЕРСИЯ: два экрана друг за другом =====
+        console.log('Mobile version: two screens in flow');
 
-        let secondScreenShown = false;
-        let scrollTimeout;
+        // На мобильном второй экран уже виден (opacity: 1 в CSS)
+        // Просто анимируем появление текста при скролле
 
-        // Показываем второй экран, но прозрачным
-        gsap.set('#contentFixed', {
-            opacity: 0,
-            visibility: 'visible',
-            pointerEvents: 'auto'
-        });
+        const textBlock = document.getElementById('textBlock');
+        const companyName = document.getElementById('companyName');
 
-        // Отслеживаем скролл
-        window.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-
-            scrollTimeout = setTimeout(() => {
-                const currentScrollTop = window.scrollY;
-                const windowHeight = window.innerHeight;
-
-                // Если проскроллили больше половины первого экрана
-                if (currentScrollTop > windowHeight * 0.5 && !secondScreenShown) {
-                    secondScreenShown = true;
-
-                    // Мгновенно показываем второй экран
-                    gsap.to(window, {
-                        scrollTo: windowHeight,
-                        duration: 0.5,
-                        ease: 'power2.inOut'
-                    });
-
-                    // Анимация появления элементов второго экрана
-                    gsap.to('#contentFixed', {
-                        opacity: 1,
-                        duration: 0.3
-                    });
-
-                    gsap.from('#textBlock', {
-                        opacity: 0,
-                        y: 30,
-                        duration: 0.6,
-                        delay: 0.2
-                    });
-
-                } else if (currentScrollTop < windowHeight * 0.3 && secondScreenShown) {
-                    // Если вернулись назад
-                    secondScreenShown = false;
-
-                    gsap.to(window, {
-                        scrollTo: 0,
-                        duration: 0.5,
-                        ease: 'power2.inOut'
-                    });
-
-                    gsap.to('#contentFixed', {
-                        opacity: 0,
-                        duration: 0.3
-                    });
+        if (textBlock) {
+            gsap.from(textBlock, {
+                opacity: 0,
+                y: 40,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: textBlock,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
                 }
-            }, 100);
-        }, { passive: true });
+            });
+        }
+
+        if (companyName) {
+            gsap.from(companyName, {
+                opacity: 0,
+                y: 20,
+                duration: 0.6,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: companyName,
+                    start: 'top 90%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        }
 
     } else {
         // ===== ДЕСКТОПНАЯ ВЕРСИЯ: анимация с нырянием =====
